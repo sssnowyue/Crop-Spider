@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>全国玉米价格</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+        body{ text-align:center} 
+    </style>
+    <script src="https://code.highcharts.com.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/themes/sand-signika.js"></script>
+</head>
+
+<body>
+    <div id="container" style="min-width:400px;height:600px"></div>
+    <div id="btn">
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/corns/1'">1个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/corns/6'">6个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/corns/12'">12个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/corns/18'">18个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/corns/24'">24个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/corns/36'">36个月</button>
+    </div>
+    <script>
+        var chart = Highcharts.chart('container', {
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: '全国部分省份'
+            },
+            subtitle: {
+                text: '近{{ month }}个月玉米价格变化分析'
+            },
+            xAxis: {
+                type: 'datetime',
+                title: {
+                    text: null
+                }
+            },
+            colors: ['#6CF', '#39F', '#06C', '#036', '#000','#000000','#800000','#FF0000','#FA8072','#8B4513','#FFA500','#FFD700','#7FFF00','#4B0082','#FF69B4','#FFFF00'],
+            yAxis: {
+                title: {
+                    text: '价格 (元/吨)'
+                },
+                min: {{ min }},
+                max: {{ max }}
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: '{point.x:%e. %b}: {point.y:.2f} 元/吨'
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        enabled: true
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '辽宁', data: {{ datas["辽宁"] }}
+                },
+                {
+                    name: '吉林', data: {{ datas["吉林"] }}
+                },
+                {
+                    name: '黑龙江', data: {{ datas["黑龙江"] }}
+                },
+                {
+                    name: '天津', data: {{ datas["天津"] }}
+                },
+                {
+                    name: '河北', data: {{ datas["河北"] }}
+                },
+                {
+                    name: '内蒙古', data: {{ datas["内蒙古"] }}
+                },
+                {
+                    name: '江苏', data: {{ datas["江苏"] }}
+                },
+                {
+                    name: '山东', data: {{ datas["山东"] }}
+                },
+                {
+                    name: '河南', data: {{ datas["河南"] }}
+                },
+                {
+                    name: '湖北', data: {{ datas["湖北"] }}
+                },
+                {
+                    name: '湖南', data: {{ datas["湖南"] }}
+                },
+                {
+                    name: '江西', data: {{ datas["江西"] }}
+                },
+                {
+                    name: '广东', data: {{ datas["广东"] }}
+                },
+                {
+                    name: '上海', data: {{ datas["上海"] }}
+                },
+                {
+                    name: '四川', data: {{ datas["四川"] }}
+                },
+                {
+                    name: '陕西', data: {{ datas["陕西"] }}
+                }
+            ]
+        });
+    </script>
+</body>
+
+</html>

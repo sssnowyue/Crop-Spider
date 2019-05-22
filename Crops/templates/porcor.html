@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>猪肉&玉米价格行情分析</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+        .buttonrs {
+            border: none;
+            color: white;
+            width: 13%;
+            height: 39px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .button1 {background-color: #E51212;}
+        .button2 {background-color: #F59D00;}
+        .button3 {background-color: #0D869A;}
+        .button4 {background-color: #00C552;} 
+        body {
+            text-align: center
+        }
+    </style>
+    <script src="https://code.highcharts.com.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/themes/sand-signika.js"></script>
+</head>
+
+<body>
+    <div id="container0" style="min-width:400px;height:600px"></div>
+    <div id="btn0">
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/porcor/{{ region }}/6'">6个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/porcor/{{ region }}/12'">12个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/porcor/{{ region }}/18'">18个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/porcor/{{ region }}/24'">24个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/porcor/{{ region }}/36'">36个月</button>
+    </div>
+    <div id="container1" style="min-width:400px;height:600px"></div>
+    <div id="btn1"">
+        <button class="buttonrs button1">国家调控一级响应 4.5</button>
+        <button class="buttonrs button2">4.5 国家调控二级响应 5.0</button>
+        <button class="buttonrs button3">5.0 国家调控三级响应 5.5</button>
+        <button class="buttonrs button4">5.5 正常波动 8.5</button>
+        <button class="buttonrs button3">8.5 国家调控三级响应 9.0</button>
+        <button class="buttonrs button2">9.0 国家调控二级响应 9.5</button>
+        <button class="buttonrs button1">9.5 国家调控一级响应</button>
+    </div>
+    <script>
+        var chart = Highcharts.chart('container0', {
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: '{{ region }}'
+            },
+            subtitle: {
+                text: '近{{ month }}个月猪粮比&猪肉&玉米价格行情分析'
+            },
+            xAxis: {
+                type: 'datetime',
+                title: {
+                    text: null
+                }
+            },
+            colors: ['#6CF', '#39F', '#9370DB', '#036', '#000'],
+            yAxis: {
+                title: {
+                    text: '猪肉价格(元/KG)玉米价格(元/10KG)'
+                },
+                min: {{ data['min'] }},
+                max: {{ data['max'] }}
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: '{point.x:%e. %b}: {point.y:.2f}'
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        enabled: true
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '猪肉价格', data: {{ data["pork"] }}
+                }, {
+                    name: '玉米价格', data: {{ data["corn"] }}
+                }
+            ]
+        });
+        var chart = Highcharts.chart('container1', {
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: '{{ region }}'
+            },
+            subtitle: {
+                text: '近{{ month }}个月猪粮比预警分析'
+            },
+            xAxis: {
+                type: 'datetime',
+                title: {
+                    text: null
+                }
+            },
+            colors: ['#FFD700', '#39F', '#9370DB', '#036', '#000'],
+            yAxis: {
+                title: {
+                    text: '猪粮比'
+                },
+                min: {{ data['min_ra'] }},
+                max: {{ data['max_ra'] }},
+        plotBands: [{
+            from: 5.5,
+            to: 8.5,
+            color: '#00C552',
+            label: {
+                text: '正常波动',
+                style: {
+                    color: '#1C1C1C'
+                }
+            }
+        },{
+            from: 8.5,
+            to: 9,
+            color: '#0D869A',
+            label: {
+                text: '国家调控三级响应',
+                style: {
+                    color: '#1C1C1C'
+                }
+            }
+        },{
+            from: 9,
+            to: 9.5,
+            color: '#F59D00',
+            label: {
+                text: '国家调控二级响应',
+                style: {
+                    color: '#1C1C1C'
+                }
+            }
+        },{
+            from: 9.5,
+            to: {{ data['hig'] }},
+            color: '#E51212',
+            label: {
+                text: '国家调控一级响应',
+                style: {
+                    color: '#1C1C1C'
+                }
+            }
+        },{
+            from: 5,
+            to: 5.5,
+            color: '#0D869A',
+            label: {
+                text: '国家调控三级响应',
+                style: {
+                    color: '#1C1C1C'
+                }
+            }
+        },{
+            from: 4.5,
+            to: 5,
+            color: '#F59D00',
+            label: {
+                text: '国家调控二级响应',
+                style: {
+                    color: '#1C1C1C'
+                }
+            }
+        },{
+            from: 4.5,
+            to: 0,
+            color: '#E51212',
+            label: {
+                text: '国家调控一级响应',
+                style: {
+                    color: '#1C1C1C'
+                }
+            }
+        }]},
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: '{point.x:%e. %b}: {point.y:.2f}'
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+        series: [{
+            name: '猪粮比', 
+            data: {{ data["pcratio"] }}
+        }]
+        });
+    </script>
+</body>
+
+</html>

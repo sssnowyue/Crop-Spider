@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>全国猪肉价格</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+        body{ text-align:center} 
+    </style>
+    <script src="https://code.highcharts.com.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/themes/sand-signika.js"></script>
+</head>
+
+<body>
+    <div id="container" style="min-width:400px;height:600px"></div>
+    <div id="btn">
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/porks/1'">1个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/porks/2'">2个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/porks/3'">3个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/porks/6'">6个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/porks/12'">12个月</button>
+        <button type="button" class="button"
+            onclick="window.location.href='http://123.207.246.172:8004/porks/20'">20个月</button>
+    </div>
+    <script>
+        var chart = Highcharts.chart('container', {
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: '全国各个地区'
+            },
+            subtitle: {
+                text: '近{{ month }}个月猪肉价格变化分析'
+            },
+            xAxis: {
+                type: 'datetime',
+                title: {
+                    text: null
+                }
+            },
+            colors: ['#6CF', '#39F', '#06C', '#036', '#000','#000000','#800000','#FF0000','#FA8072','#8B4513','#FFA500','#FFD700','#7FFF00','#4B0082','#FF69B4','#FFFF00'],
+            yAxis: {
+                title: {
+                    text: '价格 (元/KG)'
+                },
+                min: {{ min }},
+                max: {{ max }}
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: '{point.x:%e. %b}: {point.y:.2f} 元/KG'
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        enabled: true
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '辽宁', data: {{ datas["辽宁"] }}
+                },
+                {
+                    name: '吉林', data: {{ datas["吉林"] }}
+                },
+                {
+                    name: '黑龙江', data: {{ datas["黑龙江"] }}
+                },
+                {
+                    name: '北京', data: {{ datas["北京"] }}
+                },
+                {
+                    name: '天津', data: {{ datas["天津"] }}
+                },
+                {
+                    name: '河北', data: {{ datas["河北"] }}
+                },
+                {
+                    name: '山西', data: {{ datas["山西"] }}
+                },
+                {
+                    name: '内蒙古', data: {{ datas["内蒙古"] }}
+                },
+                {
+                    name: '江苏', data: {{ datas["江苏"] }}
+                },
+                {
+                    name: '浙江', data: {{ datas["浙江"] }}
+                },
+                {
+                    name: '安徽', data: {{ datas["安徽"] }}
+                },
+                {
+                    name: '福建', data: {{ datas["福建"] }}
+                },
+                {
+                    name: '山东', data: {{ datas["山东"] }}
+                },
+                {
+                    name: '河南', data: {{ datas["河南"] }}
+                },
+                {
+                    name: '湖北', data: {{ datas["湖北"] }}
+                },
+                {
+                    name: '湖南', data: {{ datas["湖南"] }}
+                },
+                {
+                    name: '江西', data: {{ datas["江西"] }}
+                },
+                {
+                    name: '广东', data: {{ datas["广东"] }}
+                },
+                {
+                    name: '广西', data: {{ datas["广西"] }}
+                },
+                {
+                    name: '重庆', data: {{ datas["重庆"] }}
+                },
+                {
+                    name: '四川', data: {{ datas["四川"] }}
+                },
+                {
+                    name: '贵州', data: {{ datas["贵州"] }}
+                },
+                {
+                    name: '云南', data: {{ datas["云南"] }}
+                },
+                {
+                    name: '陕西', data: {{ datas["陕西"] }}
+                },
+                {
+                    name: '甘肃', data: {{ datas["甘肃"] }}
+                },
+                {
+                    name: '新疆', data: {{ datas["新疆"] }}
+                }
+            ]
+        });
+    </script>
+</body>
+
+</html>

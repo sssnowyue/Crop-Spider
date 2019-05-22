@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <style>
+        body {
+            text-align: center
+        }
+
+        a:link {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>基于Scrapy的农业数据爬虫设计与实现</h1>
+    <h3>Powered by 于越</h3>
+    <h2><a href="http://123.207.246.172:8004/corns/1">全国玉米价格行情</a></h2>
+    <table border="1" width="100%" frame=void rules=none>
+        <tr>
+            <td width="10%">【东北地区】</td>
+        </tr>
+        <tr>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/哈尔滨/6">哈尔滨</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/齐齐哈尔/6">齐齐哈尔</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/佳木斯/6">佳木斯</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/绥化/6">绥化</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/通辽/6">通辽</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/扎兰屯/6">扎兰屯</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/长春/6">长春</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/公主岭/6">公主岭</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/四平/6">四平</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/榆树/6">榆树</a></td>
+        </tr>
+        <tr>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/沈阳/6">沈阳</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/铁岭/6">铁岭</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/大连/6">大连</a></td>
+        </tr>
+        <tr>
+            <td width="10%">【黄淮地区】</td>
+        </tr>
+        <tr>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/沧州/6">沧州</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/保定/6">保定</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/石家庄/6">石家庄</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/张家口/6">张家口</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/邯郸/6">邯郸</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/天津/6">天津</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/焦作/6">焦作</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/安阳/6">安阳</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/濮阳/6">濮阳</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/周口/6">周口</a></td>
+        </tr>
+        <tr>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/临沂/6">临沂</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/德州/6">德州</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/青岛/6">青岛</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/聊城/6">聊城</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/潍坊/6">潍坊</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/寿光/6">寿光</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/西安/6">西安</a></td>
+        </tr>
+        <tr>
+            <td width="10%">【港口地区】</td>
+        </tr>
+        <tr>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/鲅鱼圈港/6">鲅鱼圈港</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/锦州港/6">锦州港</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/蛇口港/6">蛇口港</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/上海港/6">上海港</a></td>
+        </tr>
+        <tr>
+            <td width="10%">【南方地区】</td>
+        </tr>
+        <tr>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/长沙/6">长沙</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/南昌/6">南昌</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/徐州/6">徐州</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/武汉/6">武汉</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/corn/成都/6">成都</a></td>
+        </tr>
+    </table>
+    <h2><a href="http://123.207.246.172:8004/porks/1">全国猪肉价格行情</a></h2>
+    <table border="1" width="100%" frame=void rules=none>
+        <tr>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/辽宁/1">辽宁</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/吉林/1">吉林</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/黑龙江/1">黑龙江</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/北京/1">北京</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/天津/1">天津</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/河北/1">河北</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/山西/1">山西</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/内蒙古/1">内蒙古</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/江苏/1">江苏</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/浙江/1">浙江</a></td>
+        </tr>
+        <tr>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/安徽/1">安徽</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/福建/1">福建</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/山东/1">山东</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/河南/1">河南</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/湖北/1">湖北</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/湖南/1">湖南</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/江西/1">江西</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/广东/1">广东</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/广西/1">广西</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/重庆/1">重庆</a></td>
+        </tr>
+        <tr>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/四川/1">四川</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/贵州/1">贵州</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/云南/1">云南</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/陕西/1">陕西</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/甘肃/1">甘肃</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/pork/新疆/1">新疆</a></td>
+        </tr>
+    </table>
+    <h2>全国猪肉&玉米价格行情分析</h2>
+    <table border="1" width="100%" frame=void rules=none>
+        <tr>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/辽宁/1">辽宁</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/吉林/1">吉林</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/黑龙江/1">黑龙江</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/天津/1">天津</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/河北/1">河北</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/内蒙古/1">内蒙古</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/江苏/1">江苏</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/山东/1">山东</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/四川/1">四川</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/陕西/1">陕西</a></td>
+        </tr>
+        <tr>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/河南/1">河南</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/湖北/1">湖北</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/湖南/1">湖南</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/江西/1">江西</a></td>
+            <td width="10%"><a href="http://123.207.246.172:8004/porcor/广东/1">广东</a></td>
+        </tr>
+    </table>
+</body>
+
+</html>
